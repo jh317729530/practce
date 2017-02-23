@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="
+http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+http://www.springframework.org/schema/context
+http://www.springframework.org/schema/context/spring-context-3.0.xsd
+">
+
+
+    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <property name="host" value="smtp.163.com"/>
+        <property name="username" value="jh317729530@163.com"/>
+        <property name="password" value="gjh130511"/>
+        <property name="defaultEncoding" value="UTF-8"/>
+        <property name="javaMailProperties">
+            <props>
+                <prop key="mail.smtp.auth">true</prop>
+                <prop key="mail.smtp.timeout">25000</prop>
+                <prop key="mail.smtp.port">25</prop>
+                <!--
+                                <prop key="mail.smtp.ssl.enable">${mail.smtp.ssl.enable}</prop>
+                -->
+            </props>
+        </property>
+    </bean>
+
+    <bean id="simpleMailMessage" class="org.springframework.mail.SimpleMailMessage">
+        <property name="from" value="jh317729530@163.com"/>
+    </bean>
+
+    <bean id="mailUtil" class="mail.MailUtil">
+        <property name="mailSender" ref="mailSender"/>
+        <property name="simpleMailMessage" ref="simpleMailMessage"/>
+    </bean>
+
+</beans>
